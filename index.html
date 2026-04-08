@@ -122,18 +122,18 @@
       </div>
     </div>
     <div class="exp-item">
-      <div class="exp-date">2022 — 2023</div>
+      <div class="exp-date">2024 — Present</div>
       <div>
-        <div class="exp-role">Junior Developer</div>
-        <div class="exp-company">Your Previous Company</div>
+        <div class="exp-role">Web Developer</div>
+        <div class="exp-company">The Sun Gym and Billiard</div>
         <div class="exp-desc">Contributed to web application development, maintained internal tools, and improved system performance. Collaborated cross-functionally with design and product teams.</div>
       </div>
     </div>
     <div class="exp-item">
-      <div class="exp-date">2021 — 2022</div>
+      <div class="exp-date">2023 — 2024</div>
       <div>
         <div class="exp-role">Intern — Web Development</div>
-        <div class="exp-company">Your Previous Company</div>
+        <div class="exp-company">IT Career Solution</div>
         <div class="exp-desc">Learned the fundamentals of shipping production code. Built UI components, fixed bugs, and participated in code reviews.</div>
       </div>
     </div>
@@ -204,14 +204,14 @@
       <a href="mailto:luban@email.com" class="contact-link">
         <div>
           <div class="contact-link-label">Email</div>
-          <div class="contact-link-val">luban@email.com</div>
+          <div class="contact-link-val">lubanmac@gmail.com</div>
         </div>
         <span class="contact-link-arrow">↗</span>
       </a>
       <a href="#" class="contact-link">
         <div>
           <div class="contact-link-label">GitHub</div>
-          <div class="contact-link-val">github.com/lubannoor</div>
+          <div class="contact-link-val">github.com/imluban</div>
         </div>
         <span class="contact-link-arrow">↗</span>
       </a>
@@ -227,42 +227,9 @@
 </section>
  
 <footer>
-  <div class="footer-copy">© 2026 Luban Noor — All rights reserved</div>
+  <div class="footer-copy">© 2026 inLuban — All rights reserved</div>
   <div class="footer-right">Designed & built by <span>LN</span></div>
 </footer>
  
-<script>
-  const cursor = document.getElementById('cursor');
-  document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-  });
-  document.addEventListener('mouseleave', () => cursor.style.opacity = '0');
-  document.addEventListener('mouseenter', () => cursor.style.opacity = '1');
- 
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      const t = document.querySelector(a.getAttribute('href'));
-      if (t) t.scrollIntoView({ behavior: 'smooth' });
-    });
-  });
-
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-      }
-    });
-  }, { threshold: 0.1 });
- 
-  document.querySelectorAll('.skill-card, .exp-item, .project-card').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(16px)';
-    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    observer.observe(el);
-  });
-</script>
 </body>
 </html>
