@@ -22,3 +22,21 @@ interactiveEls.forEach(el => {
     cursor.style.backgroundColor = 'transparent';
   });
 });
+
+// Tiny trailing dots (optional for luxury feel)
+const dots = [];
+for (let i=0; i<5; i++) {
+  const dot = document.createElement('div');
+  dot.className = 'cursor-dot';
+  document.body.appendChild(dot);
+  dots.push(dot);
+}
+document.addEventListener('mousemove', e => {
+  let x = e.clientX, y = e.clientY;
+  dots.forEach((dot, i) => {
+    setTimeout(() => {
+      dot.style.left = x + 'px';
+      dot.style.top = y + 'px';
+    }, i*40);
+  });
+});
