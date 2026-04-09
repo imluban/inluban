@@ -122,8 +122,8 @@ magnets.forEach(el => {
     const y = e.clientY - rect.top - rect.height / 2;
 
     // Different strength for each direction
-    const moveX = x > 0 ? x * 0.55 : x * 0.20;   // Right = strong, Left = gentle
-    const moveY = y > 0 ? y * 0.50 : y * 0.20;   // Down = strong, Up = gentle
+    const moveX = x > 0 ? x * 0.60 : x * 0.15;   // Right = strong, Left = gentle
+    const moveY = y > 0 ? y * 0.60 : y * 0.20;   // Down = strong, Up = gentle
 
     el.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.05)`;
   });
