@@ -15,7 +15,7 @@ const interactiveEls = document.querySelectorAll('a, button, .project-card, .btn
 
 interactiveEls.forEach(el => {
   el.addEventListener('mouseenter', () => {
-    cursor.style.transform = 'translate(-50%, -50%) scale(2)';
+    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
     cursor.style.backgroundColor = 'var(--accent)';
   });
 
