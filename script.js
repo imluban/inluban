@@ -121,7 +121,11 @@ magnets.forEach(el => {
     const x = e.clientX - rect.left - rect.width / 2;
     const y = e.clientY - rect.top - rect.height / 2;
 
-    el.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px) scale(1.03)`;
+    // Different strength for each direction
+    const moveX = x > 0 ? x * 0.55 : x * 0.20;   // Right = strong, Left = gentle
+    const moveY = y > 0 ? y * 0.50 : y * 0.20;   // Down = strong, Up = gentle
+
+    el.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.05)`;
   });
 
   el.addEventListener('mouseleave', () => {
@@ -159,7 +163,7 @@ function animateParticles() {
 
     ctx.beginPath();
     ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(128,128,128,0.1)';
+    ctx.fillStyle = 'rgba(128,128,128,0.3)';
     ctx.fill();
   });
 
