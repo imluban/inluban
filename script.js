@@ -85,6 +85,13 @@ window.addEventListener('scroll', () => {
 
   document.querySelector('.scroll-bar').style.width = progress + '%';
 });
+window.addEventListener('scroll', () => {
+  const scroll = window.scrollY;
+
+  const hero = document.querySelector('.hero-name');
+  hero.style.transform = `scale(${1 + scroll * 0.0003})`;
+  hero.style.opacity = `${1 - scroll * 0.0015}`;
+});
 
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
@@ -105,3 +112,67 @@ document.querySelectorAll('section').forEach(el => {
   observer.observe(el);
 });
 
+// magnetic button system
+const magnets = document.querySelectorAll('.btn-primary, .project-card');
+
+magnets.forEach(el => {
+  el.addEventListener('mousemove', e => {
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+
+    el.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px) scale(1.03)`;
+  });
+
+  el.addEventListener('mouseleave', () => {
+    el.style.transform = 'translate(0,0) scale(1)';
+  });
+});
+
+// particle system
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for (let i = 0; i < 80; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    vx: (Math.random() - 0.5) * 0.5,
+    vy: (Math.random() - 0.5) * 0.5
+  });
+}
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  particles.forEach(p => {
+    p.x += p.vx;
+    p.y += p.vy;
+
+    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(232,255,71,0.5)';
+    ctx.fill();
+  });
+
+  requestAnimationFrame(animateParticles);
+}
+
+animateParticles();
+
+// depth blur on scroll
+window.addEventListener('scroll', () => {
+  const blur = Math.min(window.scrollY / 200, 8);
+
+  document.querySelectorAll('.bg-layer').forEach(layer => {
+    layer.style.filter = `blur(${blur}px)`;
+  });
+});
