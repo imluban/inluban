@@ -70,3 +70,53 @@ document.addEventListener('mouseenter', () => {
   dot.style.opacity = 1;
   ring.style.opacity = 1;
 });
+
+// Scroll parallax motion
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+
+  document.querySelector('.layer-1').style.transform = `translateY(${y * 0.2}px)`;
+  document.querySelector('.layer-2').style.transform = `translateY(${y * 0.1}px)`;
+});
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const progress = (scrollTop / docHeight) * 100;
+
+  document.querySelector('.scroll-bar').style.width = progress + '%';
+});
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    } else {
+      entry.target.style.opacity = '0';
+      entry.target.style.transform = 'translateY(40px)';
+    }
+  });
+}, { threshold: 0.2 });
+
+document.querySelectorAll('section').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(40px)';
+  el.style.transition = 'all 0.8s cubic-bezier(0.16,1,0.3,1)';
+  observer.observe(el);
+});
+
+// Focus system
+const focusItems = document.querySelectorAll('.project-card, .skill-card');
+
+focusItems.forEach(el => {
+  el.classList.add('focus-item');
+
+  el.addEventListener('mouseenter', () => {
+    document.body.classList.add('focus-active');
+    el.style.opacity = '1';
+  });
+
+  el.addEventListener('mouseleave', () => {
+    document.body.classList.remove('focus-active');
+  });
+});
