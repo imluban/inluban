@@ -121,11 +121,11 @@ magnets.forEach(el => {
     const x = e.clientX - rect.left - rect.width / 2;
     const y = e.clientY - rect.top - rect.height / 2;
 
-    el.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px) scale(2.03)`;
+    el.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px) scale(1.03)`;
   });
 
   el.addEventListener('mouseleave', () => {
-    el.style.transform = 'translate(0,0) scale(2)';
+    el.style.transform = 'translate(0,0) scale(1)';
   });
 });
 
