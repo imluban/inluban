@@ -630,18 +630,53 @@ footer {
 /* ============================================================
    CURSOR DOT
    ============================================================ */
+/* MAIN DOT */
 .cursor-dot {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
   border-radius: 50%;
-  border: 1px solid var(--accent);
   pointer-events: none;
+  z-index: 10000;
   transform: translate(-50%, -50%);
-  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+/* GLOW RING */
+.cursor-ring {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  pointer-events: none;
   z-index: 9999;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(232,255,71,0.25) 0%, rgba(232,255,71,0.05) 40%, transparent 70%);
+  filter: blur(6px);
+  transition: transform 0.15s ease, opacity 0.2s ease;
+}
+
+/* TRAIL DOTS */
+.cursor-trail {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: rgba(232,255,71,0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  filter: blur(2px);
+}
+
+/* HOVER STATE */
+.cursor-hover .cursor-ring {
+  transform: translate(-50%, -50%) scale(1.8);
+  opacity: 0.9;
+}
+
+.cursor-hover .cursor-dot {
+  transform: translate(-50%, -50%) scale(1.5);
 }
  
 /* ============================================================
