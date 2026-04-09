@@ -48,15 +48,6 @@ body {
   overflow-x: hidden;
 }
 
-body.focus-active * {
-  opacity: 0.4;
-  transition: opacity 0.3s ease;
-}
-
-body.focus-active .focus-item {
-  opacity: 1 !important;
-}
-
 .bg-layer {
   position: fixed;
   inset: 0;
