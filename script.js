@@ -1,72 +1,72 @@
-const cursor = document.getElementById('cursor');
+const dot = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
 
-// Move cursor
+let mouseX = 0, mouseY = 0;
+let ringX = 0, ringY = 0;
+
+// Track mouse instantly
 document.addEventListener('mousemove', e => {
-  cursor.style.left = e.clientX + 'px';
-  cursor.style.top = e.clientY + 'px';
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+
+  dot.style.left = mouseX + 'px';
+  dot.style.top = mouseY + 'px';
 });
 
-// Show / hide when leaving window
-document.addEventListener('mouseleave', () => cursor.style.opacity = '0');
-document.addEventListener('mouseenter', () => cursor.style.opacity = '1');
+// Smooth lag for ring (luxury feel)
+function animate() {
+  ringX += (mouseX - ringX) * 0.12;
+  ringY += (mouseY - ringY) * 0.12;
 
-// Hover effects
-const interactiveEls = document.querySelectorAll('a, button, .project-card, .btn-primary, .btn-ghost');
+  ring.style.left = ringX + 'px';
+  ring.style.top = ringY + 'px';
 
-interactiveEls.forEach(el => {
+  requestAnimationFrame(animate);
+}
+animate();
+
+// Hover interaction
+const hoverEls = document.querySelectorAll('a, button, .project-card, .btn-primary, .btn-ghost');
+
+hoverEls.forEach(el => {
   el.addEventListener('mouseenter', () => {
-    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-    cursor.style.backgroundColor = 'var(--accent)';
+    document.body.classList.add('cursor-hover');
   });
-
   el.addEventListener('mouseleave', () => {
-    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-    cursor.style.backgroundColor = 'transparent';
+    document.body.classList.remove('cursor-hover');
   });
 });
 
-// Trailing dots
-const dots = [];
-for (let i = 0; i < 5; i++) {
-  const dot = document.createElement('div');
-  dot.className = 'cursor-dot';
-  document.body.appendChild(dot);
-  dots.push(dot);
+// TRAIL SYSTEM
+const trails = [];
+for (let i = 0; i < 6; i++) {
+  const t = document.createElement('div');
+  t.className = 'cursor-trail';
+  document.body.appendChild(t);
+  trails.push(t);
 }
 
 document.addEventListener('mousemove', e => {
-  let x = e.clientX, y = e.clientY;
-
-  dots.forEach((dot, i) => {
+  trails.forEach((trail, i) => {
     setTimeout(() => {
-      dot.style.left = x + 'px';
-      dot.style.top = y + 'px';
-    }, i * 40);
+      trail.style.left = e.clientX + 'px';
+      trail.style.top = e.clientY + 'px';
+      trail.style.opacity = 1;
+
+      setTimeout(() => {
+        trail.style.opacity = 0;
+      }, 200);
+    }, i * 30);
   });
 });
 
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    e.preventDefault();
-    const t = document.querySelector(a.getAttribute('href'));
-    if (t) t.scrollIntoView({ behavior: 'smooth' });
-  });
+// Hide on leave
+document.addEventListener('mouseleave', () => {
+  dot.style.opacity = 0;
+  ring.style.opacity = 0;
 });
 
-// Reveal animation
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.opacity = '1';
-      entry.target.style.transform = 'translateY(0)';
-    }
-  });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.skill-card, .exp-item, .project-card').forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(16px)';
-  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-  observer.observe(el);
+document.addEventListener('mouseenter', () => {
+  dot.style.opacity = 1;
+  ring.style.opacity = 1;
 });
