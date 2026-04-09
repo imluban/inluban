@@ -47,6 +47,30 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
 }
+
+body.focus-active * {
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+}
+
+body.focus-active .focus-item {
+  opacity: 1 !important;
+}
+
+.bg-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.layer-1 {
+  background: radial-gradient(circle at 30% 20%, rgba(232,255,71,0.08), transparent 50%);
+}
+
+.layer-2 {
+  background: radial-gradient(circle at 70% 80%, rgba(232,255,71,0.05), transparent 60%);
+}
  
 /* ============================================================
    NAVIGATION
@@ -151,6 +175,11 @@ section {
   flex-direction: column;
   justify-content: center;
   position: relative;
+  animation: heroFloat 6s ease-in-out infinite;
+}
+@keyframes heroFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
  
 .hero-tag {
@@ -270,6 +299,16 @@ section {
   text-transform: uppercase;
   color: var(--text-dim);
   writing-mode: vertical-rl;
+}
+
+.scroll-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: var(--accent);
+  z-index: 9999;
 }
  
 /* ============================================================
