@@ -113,7 +113,7 @@ document.querySelectorAll('section').forEach(el => {
 });
 
 // magnetic button system
-const magnets = document.querySelectorAll('.btn-primary, .project-card');
+const magnets = document.querySelectorAll('.btn-primary, .btn-ghost, .project-card');
 
 magnets.forEach(el => {
   el.addEventListener('mousemove', e => {
