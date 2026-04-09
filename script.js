@@ -105,18 +105,3 @@ document.querySelectorAll('section').forEach(el => {
   observer.observe(el);
 });
 
-// Focus system
-const focusItems = document.querySelectorAll('.project-card, .skill-card');
-
-focusItems.forEach(el => {
-  el.classList.add('focus-item');
-
-  el.addEventListener('mouseenter', () => {
-    document.body.classList.add('focus-active');
-    el.style.opacity = '1';
-  });
-
-  el.addEventListener('mouseleave', () => {
-    document.body.classList.remove('focus-active');
-  });
-});
