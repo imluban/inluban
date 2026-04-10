@@ -36,12 +36,12 @@
 }
 
 .loader-logo {
-  height: 50px;
+  height: 90px;
   width: auto;
   opacity: 0;
-  transform: scale(2);
-  animation: logoFade 1s ease forwards, logoPulse 2s infinite ease-in-out;
-  filter: drop-shadow(0 0 12px rgba(232, 255, 71, 0.4));
+  transform: scale(0.9);
+  animation: logoFade 2s ease forwards, logoPulse 6s infinite ease-in-out;
+  filter: drop-shadow(0 0 18px rgba(232, 255, 71, 0.4));
 }
 
 @keyframes logoFade {
@@ -53,7 +53,7 @@
 
 @keyframes logoPulse {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+  50% { transform: scale(1.04); }
 }
  
 html {
