@@ -22,6 +22,28 @@
   margin: 0;
   padding: 0;
 }
+
+#loader {
+  position: fixed;
+  inset: 0;
+  background: #0a0a0a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+
+.loader-text {
+  font-size: 2rem;
+  letter-spacing: 0.5em;
+  color: var(--accent);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
  
 html {
   scroll-behavior: smooth;
@@ -52,6 +74,11 @@ body {
   font-size: 16px;
   min-height: 100vh;
   overflow-x: hidden;
+}
+
+::selection {
+  background: var(--accent);
+  color: #000;
 }
 
 .bg-layer {
@@ -138,6 +165,18 @@ section {
   background: var(--border);
   margin-left: 3rem;
   margin-right: 3rem;
+}
+
+h1, h2, h3 {
+  letter-spacing: -0.03em;
+}
+
+.sec-title {
+  opacity: 0.9;
+}
+
+.hero-name {
+  text-shadow: 0 10px 40px rgba(0,0,0,0.6);
 }
  
 /* ============================================================
@@ -293,6 +332,16 @@ section {
   color: var(--text);
   border-color: rgba(255, 255, 255, 0.3);
   transform: scale(1.05);
+}
+
+a, button {
+  position: relative;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+a:active, button:active {
+  transform: scale(0.96);
+  opacity: 0.8;
 }
  
 .hero-scroll {
