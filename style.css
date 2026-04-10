@@ -39,7 +39,7 @@
   height: 50px;
   width: auto;
   opacity: 0;
-  transform: scale(0.9);
+  transform: scale(2);
   animation: logoFade 1s ease forwards, logoPulse 2s infinite ease-in-out;
   filter: drop-shadow(0 0 12px rgba(232, 255, 71, 0.4));
 }
@@ -138,8 +138,9 @@ nav {
 }
 
 .nav-logo img {
-  height: 28px;
+  height: 40px;
   width: auto;
+  display: block;
   object-fit: contain;
   filter: brightness(1.1) contrast(1.1);
   transition: transform 0.3s ease, filter 0.3s ease;
@@ -148,10 +149,6 @@ nav {
 .nav-logo img:hover {
   transform: scale(1.08);
   filter: brightness(1.4);
-}
-
-.nav-logo img {
-  filter: drop-shadow(0 0 6px rgba(232,255,71,0.4));
 }
  
 .nav-links {
