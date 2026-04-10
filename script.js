@@ -1,3 +1,29 @@
+// premium loading
+window.addEventListener('load', () => {
+  const loader = document.getElementById('loader');
+
+  setTimeout(() => {
+    loader.style.opacity = '0';
+    loader.style.transition = 'opacity 0.6s ease';
+
+    setTimeout(() => {
+      loader.style.display = 'none';
+    }, 600);
+  }, 800);
+});
+
+// hover sound
+const sound = document.getElementById('hover-sound');
+
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    sound.currentTime = 0;
+    sound.volume = 0.2;
+    sound.play();
+  });
+});
+
+// cursor stuffs
 const dot = document.getElementById('cursor');
 const ring = document.getElementById('cursor-ring');
 
@@ -179,4 +205,18 @@ window.addEventListener('scroll', () => {
   document.querySelectorAll('.bg-layer').forEach(layer => {
     layer.style.filter = `blur(${blur}px)`;
   });
+});
+
+
+// Throttle scroll events (prevents lag)
+let ticking = false;
+
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    window.requestAnimationFrame(() => {
+      // your scroll logic here
+      ticking = false;
+    });
+    ticking = true;
+  }
 });
