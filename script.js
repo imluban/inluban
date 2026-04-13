@@ -113,54 +113,109 @@ magnets.forEach(el => {
   });
 });
 
-
-// ================= NEXT-LEVEL INTERACTIVE BG =================
+// ELITE INTERACTIVE BACKGROUND
 const canvas = document.getElementById('bg-canvas');
 const ctx = canvas.getContext('2d');
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let points = [];
-const spacing = 60;
-
-for (let x = 0; x < canvas.width; x += spacing) {
-  for (let y = 0; y < canvas.height; y += spacing) {
-    points.push({ x, y });
-  }
+let w, h;
+function resize() {
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
 }
+resize();
+window.addEventListener('resize', resize);
 
-let mx = 0, my = 0;
+// mouse tracking (with inertia)
+let mouse = { x: w / 2, y: h / 2 };
+let smooth = { x: w / 2, y: h / 2 };
 
 document.addEventListener('mousemove', e => {
-  mx = e.clientX;
-  my = e.clientY;
+  mouse.x = e.clientX;
+  mouse.y = e.clientY;
 });
 
-function draw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+// energy nodes
+const nodes = [];
+const NODE_COUNT = 60;
 
-  points.forEach(p => {
-    const dx = mx - p.x;
-    const dy = my - p.y;
+for (let i = 0; i < NODE_COUNT; i++) {
+  nodes.push({
+    x: Math.random() * w,
+    y: Math.random() * h,
+    vx: (Math.random() - 0.5) * 0.4,
+    vy: (Math.random() - 0.5) * 0.4
+  });
+}
+
+function animateBG() {
+  ctx.clearRect(0, 0, w, h);
+
+  // smooth mouse follow (luxury feel)
+  smooth.x += (mouse.x - smooth.x) * 0.08;
+  smooth.y += (mouse.y - smooth.y) * 0.08;
+
+  // draw nodes
+  nodes.forEach(n => {
+    n.x += n.vx;
+    n.y += n.vy;
+
+    // bounce edges
+    if (n.x < 0 || n.x > w) n.vx *= -1;
+    if (n.y < 0 || n.y > h) n.vy *= -1;
+
+    // distance to mouse
+    const dx = n.x - smooth.x;
+    const dy = n.y - smooth.y;
     const dist = Math.sqrt(dx * dx + dy * dy);
 
-    const force = Math.max(0, 120 - dist);
-    const angle = Math.atan2(dy, dx);
+    // attraction field
+    if (dist < 200) {
+      n.x += dx * 0.002;
+      n.y += dy * 0.002;
+    }
 
-    const offsetX = Math.cos(angle) * force * 0.2;
-    const offsetY = Math.sin(angle) * force * 0.2;
+    // glow intensity based on proximity
+    const alpha = 1 - Math.min(dist / 250, 1);
 
     ctx.beginPath();
-    ctx.arc(p.x - offsetX, p.y - offsetY, 1.2, 0, Math.PI * 2);
-    ctx.fillStyle = "rgba(232,255,71,0.25)";
+    ctx.arc(n.x, n.y, 1.5 + alpha * 2, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(232,255,71,${0.15 + alpha * 0.4})`;
     ctx.fill();
   });
 
-  requestAnimationFrame(draw);
+  // connect nearby nodes (premium web look)
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      const dx = nodes[i].x - nodes[j].x;
+      const dy = nodes[i].y - nodes[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+
+      if (dist < 120) {
+        ctx.beginPath();
+        ctx.moveTo(nodes[i].x, nodes[i].y);
+        ctx.lineTo(nodes[j].x, nodes[j].y);
+        ctx.strokeStyle = `rgba(232,255,71,${0.05 - dist / 3000})`;
+        ctx.stroke();
+      }
+    }
+  }
+
+  // central glow (energy core)
+  const gradient = ctx.createRadialGradient(
+    smooth.x, smooth.y, 0,
+    smooth.x, smooth.y, 250
+  );
+
+  gradient.addColorStop(0, "rgba(232,255,71,0.15)");
+  gradient.addColorStop(1, "rgba(232,255,71,0)");
+
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, w, h);
+
+  requestAnimationFrame(animateBG);
 }
 
-draw();
+animateBG();
 
 
 // ================= SCROLL BLUR =================
