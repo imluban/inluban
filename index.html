@@ -9,6 +9,7 @@
 </head>
 <body>
 
+<!-- LOADER -->
 <div id="loader">
   <div class="loader-content">
     <img src="assets/images/logo22.png" alt="Luban Logo" class="loader-logo" />
@@ -16,8 +17,14 @@
   </div>
 </div>
 
+<!-- INTERACTIVE BACKGROUND LAYERS -->
 <div class="bg-layer layer-1"></div>
 <div class="bg-layer layer-2"></div>
+
+<!-- NEW: INTERACTIVE GLOW FIELD -->
+<div id="interactive-bg"></div>
+
+<!-- CANVAS SYSTEM (kept) -->
 <canvas id="bg-canvas"></canvas>
 
 <div class="scroll-bar"></div>
@@ -27,10 +34,11 @@
 
 <audio id="hover-sound" src="hover.mp3" preload="auto"></audio>
  
+<!-- NAV -->
 <nav>
   <div class="nav-logo">
-  <img src="assets/images/logo22.png" alt="Luban Noor Logo">
-</div>
+    <img src="assets/images/logo22.png" alt="Luban Noor Logo">
+  </div>
   <div class="nav-links">
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
@@ -45,10 +53,12 @@
   <div class="hero-tag">Full-Stack Developer</div>
   <h1 class="hero-name">Luban<br/><span>Noor.</span></h1>
   <p class="hero-bio">I design and build digital systems that turn ideas into scalable businesses.</p>
+  
   <div class="hero-ctas">
     <a href="#projects" class="btn-primary">View Work ↓</a>
     <a href="#contact" class="btn-ghost">Get in Touch</a>
   </div>
+
   <div class="hero-scroll">Scroll</div>
 </section>
  
@@ -172,7 +182,7 @@
       <div>
         <div class="project-num">01 / Featured</div>
         <div class="project-name">Project Alpha</div>
-        <div class="project-desc">A scalable web platform built from the ground up — handling user auth, real-time data, and a fully responsive interface. Replace this with your flagship project description.</div>
+        <div class="project-desc">A scalable web platform built from the ground up — handling user auth, real-time data, and a fully responsive interface.</div>
         <div class="project-tags">
           <span class="tag">Python</span>
           <span class="tag">JavaScript</span>
@@ -182,20 +192,22 @@
       </div>
       <div class="project-arrow">↗</div>
     </div>
+
     <div class="project-card">
       <div class="project-num">02</div>
       <div class="project-name">Project Beta</div>
-      <div class="project-desc">Short description of this project and what problem it solves. Keep it to 2–3 lines.</div>
+      <div class="project-desc">Short description of this project and what problem it solves.</div>
       <div class="project-tags">
         <span class="tag">Python</span>
         <span class="tag">HTML</span>
       </div>
       <div class="project-arrow bottom-right">↗</div>
     </div>
+
     <div class="project-card">
       <div class="project-num">03</div>
       <div class="project-name">Project Gamma</div>
-      <div class="project-desc">Another thing you built. What's interesting about it? What did you solve?</div>
+      <div class="project-desc">Another thing you built. What's interesting about it?</div>
       <div class="project-tags">
         <span class="tag">JavaScript</span>
         <span class="tag">CSS</span>
@@ -249,7 +261,7 @@
   <div class="footer-right">Designed & built by <span>LN</span></div>
 </footer>
 
- <script src="script.js"></script>
+<script src="script.js"></script>
  
 </body>
 </html>
