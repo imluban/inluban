@@ -4,16 +4,6 @@ const loaderLogo = document.getElementById('loader-logo');
 if (navLogo) {
   navLogo.addEventListener('error', () => handleImgError(navLogo, 'LN'));
 }
-if (loaderLogo) {
-  loaderLogo.addEventListener('error', () => {
-    loaderLogo.style.display = 'none';
-    const fallback = document.createElement('span');
-    fallback.className = 'loader-logo-fallback';
-    fallback.textContent = 'LN';
-    loaderLogo.parentNode.appendChild(fallback);
-  });
-}
-
 
 //loader
 window.addEventListener('load', () => {
