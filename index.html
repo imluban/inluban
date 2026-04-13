@@ -12,32 +12,28 @@
 <!-- LOADER -->
 <div id="loader">
   <div class="loader-content">
-    <img src="assets/images/logo22.png" alt="Luban Logo" class="loader-logo" />
-    <div class="loader-bar"></div>
+    <!-- If logo image is missing, JS will swap this to text fallback -->
+    <img src="assets/images/logo22.png" alt="LN" class="loader-logo" id="loader-logo" />
   </div>
 </div>
 
-<!-- INTERACTIVE BACKGROUND LAYERS -->
+<!-- BACKGROUND LAYERS -->
 <div class="bg-layer layer-1"></div>
 <div class="bg-layer layer-2"></div>
-
-<!-- NEW: INTERACTIVE GLOW FIELD -->
-<div id="interactive-bg"></div>
-
-<!-- CANVAS SYSTEM (kept) -->
 <canvas id="bg-canvas"></canvas>
 
-<div class="scroll-bar"></div>
- 
+<!-- SCROLL PROGRESS -->
+<div class="scroll-bar" id="scroll-bar"></div>
+
+<!-- CURSOR -->
 <div class="cursor-dot" id="cursor"></div>
 <div class="cursor-ring" id="cursor-ring"></div>
 
-<audio id="hover-sound" src="hover.mp3" preload="auto"></audio>
- 
 <!-- NAV -->
 <nav>
   <div class="nav-logo">
-    <img src="assets/images/logo22.png" alt="Luban Noor Logo">
+    <!-- If logo is missing, JS shows text fallback -->
+    <img src="assets/images/logo22.png" alt="LN" id="nav-logo" />
   </div>
   <div class="nav-links">
     <a href="#about">About</a>
@@ -47,23 +43,21 @@
     <a href="#contact">Contact</a>
   </div>
 </nav>
- 
+
 <!-- HERO -->
 <section id="hero">
   <div class="hero-tag">Full-Stack Developer</div>
   <h1 class="hero-name">Luban<br/><span>Noor.</span></h1>
   <p class="hero-bio">I design and build digital systems that turn ideas into scalable businesses.</p>
-  
   <div class="hero-ctas">
     <a href="#projects" class="btn-primary">View Work ↓</a>
     <a href="#contact" class="btn-ghost">Get in Touch</a>
   </div>
-
   <div class="hero-scroll">Scroll</div>
 </section>
- 
+
 <div class="divider"></div>
- 
+
 <!-- ABOUT -->
 <section id="about">
   <div class="sec-header">
@@ -97,9 +91,9 @@
     </div>
   </div>
 </section>
- 
+
 <div class="divider"></div>
- 
+
 <!-- SKILLS -->
 <section id="skills">
   <div class="sec-header">
@@ -108,31 +102,31 @@
     <div class="sec-line"></div>
   </div>
   <div class="skills-grid">
-    <div class="skill-card">
+    <div class="skill-card reveal">
       <div class="skill-icon">01 / lang</div>
       <div class="skill-name">Python</div>
       <div class="skill-desc">Backend systems, automation, data pipelines, APIs, scripting</div>
     </div>
-    <div class="skill-card">
+    <div class="skill-card reveal">
       <div class="skill-icon">02 / lang</div>
       <div class="skill-name">JavaScript</div>
       <div class="skill-desc">Dynamic interfaces, async logic, Node.js, browser APIs</div>
     </div>
-    <div class="skill-card">
+    <div class="skill-card reveal">
       <div class="skill-icon">03 / markup</div>
       <div class="skill-name">HTML</div>
       <div class="skill-desc">Semantic structure, accessibility, standards-compliant markup</div>
     </div>
-    <div class="skill-card">
+    <div class="skill-card reveal">
       <div class="skill-icon">04 / style</div>
       <div class="skill-name">CSS</div>
       <div class="skill-desc">Layouts, animations, responsive design, design systems</div>
     </div>
   </div>
 </section>
- 
+
 <div class="divider"></div>
- 
+
 <!-- EXPERIENCE -->
 <section id="experience">
   <div class="sec-header">
@@ -141,7 +135,7 @@
     <div class="sec-line"></div>
   </div>
   <div class="exp-list">
-    <div class="exp-item">
+    <div class="exp-item reveal">
       <div class="exp-date">2023 — Present</div>
       <div>
         <div class="exp-role">Full-Stack Developer</div>
@@ -149,7 +143,7 @@
         <div class="exp-desc">Designing and building end-to-end web products for clients — from architecture and backend logic to polished front-end interfaces. Delivering scalable systems that power real businesses.</div>
       </div>
     </div>
-    <div class="exp-item">
+    <div class="exp-item reveal">
       <div class="exp-date">2024 — Present</div>
       <div>
         <div class="exp-role">Web Developer</div>
@@ -157,7 +151,7 @@
         <div class="exp-desc">Contributed to web application development, maintained internal tools, and improved system performance. Collaborated cross-functionally with design and product teams.</div>
       </div>
     </div>
-    <div class="exp-item">
+    <div class="exp-item reveal">
       <div class="exp-date">2023 — 2024</div>
       <div>
         <div class="exp-role">Intern — Web Development</div>
@@ -167,9 +161,9 @@
     </div>
   </div>
 </section>
- 
+
 <div class="divider"></div>
- 
+
 <!-- PROJECTS -->
 <section id="projects">
   <div class="sec-header">
@@ -178,7 +172,7 @@
     <div class="sec-line"></div>
   </div>
   <div class="projects-grid">
-    <div class="project-card featured">
+    <div class="project-card featured reveal">
       <div>
         <div class="project-num">01 / Featured</div>
         <div class="project-name">Project Alpha</div>
@@ -192,8 +186,7 @@
       </div>
       <div class="project-arrow">↗</div>
     </div>
-
-    <div class="project-card">
+    <div class="project-card reveal">
       <div class="project-num">02</div>
       <div class="project-name">Project Beta</div>
       <div class="project-desc">Short description of this project and what problem it solves.</div>
@@ -203,8 +196,7 @@
       </div>
       <div class="project-arrow bottom-right">↗</div>
     </div>
-
-    <div class="project-card">
+    <div class="project-card reveal">
       <div class="project-num">03</div>
       <div class="project-name">Project Gamma</div>
       <div class="project-desc">Another thing you built. What's interesting about it?</div>
@@ -216,9 +208,9 @@
     </div>
   </div>
 </section>
- 
+
 <div class="divider"></div>
- 
+
 <!-- CONTACT -->
 <section id="contact">
   <div class="sec-header">
@@ -226,26 +218,27 @@
     <h2 class="sec-title">Contact</h2>
     <div class="sec-line"></div>
   </div>
-  <div class="contact-inner">
+  <div class="contact-inner reveal">
     <div class="contact-heading">
       Let's build<br/>something<br/><span>real.</span>
     </div>
     <div class="contact-links">
-      <a href="mailto:luban@email.com" class="contact-link">
+      <!-- Fixed: mailto now matches the displayed email -->
+      <a href="mailto:lubanmac@gmail.com" class="contact-link">
         <div>
           <div class="contact-link-label">Email</div>
           <div class="contact-link-val">lubanmac@gmail.com</div>
         </div>
         <span class="contact-link-arrow">↗</span>
       </a>
-      <a href="#" class="contact-link">
+      <a href="https://github.com/imluban" target="_blank" rel="noopener" class="contact-link">
         <div>
           <div class="contact-link-label">GitHub</div>
           <div class="contact-link-val">github.com/imluban</div>
         </div>
         <span class="contact-link-arrow">↗</span>
       </a>
-      <a href="#" class="contact-link">
+      <a href="https://linkedin.com/in/lubannoor" target="_blank" rel="noopener" class="contact-link">
         <div>
           <div class="contact-link-label">LinkedIn</div>
           <div class="contact-link-val">linkedin.com/in/lubannoor</div>
@@ -255,13 +248,12 @@
     </div>
   </div>
 </section>
- 
+
 <footer>
   <div class="footer-copy">© 2026 inLuban — All rights reserved</div>
   <div class="footer-right">Designed & built by <span>LN</span></div>
 </footer>
 
 <script src="script.js"></script>
- 
 </body>
 </html>
