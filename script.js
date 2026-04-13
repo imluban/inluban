@@ -1,18 +1,23 @@
-// premium loading
-window.addEventListener('load', () => {
-  const loader = document.getElementById('loader');
+// ================= LOADER (CLEAN + SYNCED) =================
+window.addEventListener("load", () => {
+  const loader = document.getElementById("loader");
 
+  // match your CSS animation timing
   setTimeout(() => {
-    loader.style.opacity = '0';
-    loader.style.transition = 'opacity 0.6s ease';
+    loader.style.opacity = "0";
+    loader.style.transition = "opacity 1s ease";
+
+    document.body.style.opacity = "1";
 
     setTimeout(() => {
-      loader.style.display = 'none';
-    }, 600);
-  }, 800);
+      loader.style.display = "none";
+    }, 1000);
+
+  }, 5200); // matches logo fade-out timing
 });
 
-// hover sound
+
+// ================= HOVER SOUND =================
 const sound = document.getElementById('hover-sound');
 
 document.querySelectorAll('a, button').forEach(el => {
@@ -23,14 +28,14 @@ document.querySelectorAll('a, button').forEach(el => {
   });
 });
 
-// cursor stuffs
+
+// ================= CURSOR SYSTEM =================
 const dot = document.getElementById('cursor');
 const ring = document.getElementById('cursor-ring');
 
 let mouseX = 0, mouseY = 0;
 let ringX = 0, ringY = 0;
 
-// Track mouse instantly
 document.addEventListener('mousemove', e => {
   mouseX = e.clientX;
   mouseY = e.clientY;
@@ -39,7 +44,6 @@ document.addEventListener('mousemove', e => {
   dot.style.top = mouseY + 'px';
 });
 
-// Smooth lag for ring (luxury feel)
 function animate() {
   ringX += (mouseX - ringX) * 0.12;
   ringY += (mouseY - ringY) * 0.12;
@@ -51,7 +55,8 @@ function animate() {
 }
 animate();
 
-// Hover interaction
+
+// hover states
 const hoverEls = document.querySelectorAll('a, button, .project-card, .btn-primary, .btn-ghost');
 
 hoverEls.forEach(el => {
@@ -63,7 +68,8 @@ hoverEls.forEach(el => {
   });
 });
 
-// TRAIL SYSTEM
+
+// ================= TRAIL =================
 const trails = [];
 for (let i = 0; i < 6; i++) {
   const t = document.createElement('div');
@@ -86,18 +92,8 @@ document.addEventListener('mousemove', e => {
   });
 });
 
-// Hide on leave
-document.addEventListener('mouseleave', () => {
-  dot.style.opacity = 0;
-  ring.style.opacity = 0;
-});
 
-document.addEventListener('mouseenter', () => {
-  dot.style.opacity = 1;
-  ring.style.opacity = 1;
-});
-
-// magnetic button system
+// ================= MAGNETIC BUTTON =================
 const magnets = document.querySelectorAll('.btn-ghost');
 
 magnets.forEach(el => {
@@ -106,9 +102,8 @@ magnets.forEach(el => {
     const x = e.clientX - rect.left - rect.width / 2;
     const y = e.clientY - rect.top - rect.height / 2;
 
-    // Different strength for each direction
-    const moveX = x > 0 ? x * 0.60 : x * 0.15;   // Right = strong, Left = gentle
-    const moveY = y > 0 ? y * 0.60 : y * 0.20;   // Down = strong, Up = gentle
+    const moveX = x > 0 ? x * 0.6 : x * 0.15;
+    const moveY = y > 0 ? y * 0.6 : y * 0.2;
 
     el.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.05)`;
   });
@@ -118,80 +113,61 @@ magnets.forEach(el => {
   });
 });
 
-// particle system
+
+// ================= NEXT-LEVEL INTERACTIVE BG =================
 const canvas = document.getElementById('bg-canvas');
 const ctx = canvas.getContext('2d');
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let particles = [];
+let points = [];
+const spacing = 60;
 
-for (let i = 0; i < 80; i++) {
-  particles.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    vx: (Math.random() - 0.5) * 0.5,
-    vy: (Math.random() - 0.5) * 0.5
-  });
+for (let x = 0; x < canvas.width; x += spacing) {
+  for (let y = 0; y < canvas.height; y += spacing) {
+    points.push({ x, y });
+  }
 }
 
-function animateParticles() {
+let mx = 0, my = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX;
+  my = e.clientY;
+});
+
+function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  particles.forEach(p => {
-    p.x += p.vx;
-    p.y += p.vy;
+  points.forEach(p => {
+    const dx = mx - p.x;
+    const dy = my - p.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
 
-    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+    const force = Math.max(0, 120 - dist);
+    const angle = Math.atan2(dy, dx);
+
+    const offsetX = Math.cos(angle) * force * 0.2;
+    const offsetY = Math.sin(angle) * force * 0.2;
 
     ctx.beginPath();
-    ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(128,128,128,0.3)';
+    ctx.arc(p.x - offsetX, p.y - offsetY, 1.2, 0, Math.PI * 2);
+    ctx.fillStyle = "rgba(232,255,71,0.25)";
     ctx.fill();
   });
 
-  requestAnimationFrame(animateParticles);
+  requestAnimationFrame(draw);
 }
 
-animateParticles();
+draw();
 
-// depth blur on scroll
+
+// ================= SCROLL BLUR =================
 window.addEventListener('scroll', () => {
   const blur = Math.min(window.scrollY / 200, 8);
 
   document.querySelectorAll('.bg-layer').forEach(layer => {
     layer.style.filter = `blur(${blur}px)`;
   });
-});
-
-
-// Throttle scroll events (prevents lag)
-let ticking = false;
-
-window.addEventListener('scroll', () => {
-  if (!ticking) {
-    window.requestAnimationFrame(() => {
-      // your scroll logic here
-      ticking = false;
-    });
-    ticking = true;
-  }
-});
-
-// site appearing
-window.addEventListener("load", () => {
-  const loader = document.getElementById("loader");
-
-  setTimeout(() => {
-    loader.style.opacity = "0";
-    
-    document.body.style.opacity = "1";
-
-    setTimeout(() => {
-      loader.style.display = "none";
-    }, 800);
-
-  }, 6000);
 });
