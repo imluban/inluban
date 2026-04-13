@@ -97,47 +97,6 @@ document.addEventListener('mouseenter', () => {
   ring.style.opacity = 1;
 });
 
-// Scroll parallax motion
-window.addEventListener('scroll', () => {
-  const y = window.scrollY;
-
-  document.querySelector('.layer-1').style.transform = `translateY(${y * 0.2}px)`;
-  document.querySelector('.layer-2').style.transform = `translateY(${y * 0.1}px)`;
-});
-window.addEventListener('scroll', () => {
-  const scrollTop = window.scrollY;
-  const docHeight = document.body.scrollHeight - window.innerHeight;
-  const progress = (scrollTop / docHeight) * 100;
-
-  document.querySelector('.scroll-bar').style.width = progress + '%';
-});
-window.addEventListener('scroll', () => {
-  const scroll = window.scrollY;
-
-  const hero = document.querySelector('.hero-name');
-  hero.style.transform = `scale(${1 + scroll * 0.0003})`;
-  hero.style.opacity = `${1 - scroll * 0.0015}`;
-});
-
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.opacity = '1';
-      entry.target.style.transform = 'translateY(0)';
-    } else {
-      entry.target.style.opacity = '0';
-      entry.target.style.transform = 'translateY(40px)';
-    }
-  });
-}, { threshold: 0.2 });
-
-document.querySelectorAll('section').forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(40px)';
-  el.style.transition = 'all 0.8s cubic-bezier(0.16,1,0.3,1)';
-  observer.observe(el);
-});
-
 // magnetic button system
 const magnets = document.querySelectorAll('.btn-ghost');
 
@@ -219,4 +178,20 @@ window.addEventListener('scroll', () => {
     });
     ticking = true;
   }
+});
+
+// site appearing
+window.addEventListener("load", () => {
+  const loader = document.getElementById("loader");
+
+  setTimeout(() => {
+    loader.style.opacity = "0";
+    
+    document.body.style.opacity = "1";
+
+    setTimeout(() => {
+      loader.style.display = "none";
+    }, 800);
+
+  }, 6000);
 });
