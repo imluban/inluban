@@ -1,12 +1,3 @@
-// IMAGE FALLBACKS
-function handleImgError(imgEl, fallbackText) {
-  imgEl.style.display = 'none';
-  const fallback = document.createElement('span');
-  fallback.className = 'nav-logo-text';
-  fallback.textContent = fallbackText;
-  imgEl.parentNode.appendChild(fallback);
-}
-
 const navLogo = document.getElementById('nav-logo');
 const loaderLogo = document.getElementById('loader-logo');
 
