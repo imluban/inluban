@@ -77,8 +77,8 @@ body::before {
   transform: scale(0.9);
   animation:
     logoFadeIn 1.5s ease forwards 0s,
-    logoPulse 3s ease-in-out infinite 1s,
-    logoFadeOut 1.5s ease forwards 2.8s;
+    logoPulse 3s ease-in-out infinite 1.5s,
+    logoFadeOut 1.5s ease forwards 4.5s;
   filter: drop-shadow(0 0 18px rgba(232, 255, 71, 0.4));
 }
 
