@@ -12,14 +12,13 @@ window.addEventListener('load', () => {
   setTimeout(() => {
     loader.style.opacity = '0';
 
-    //show the page as loader fades out
     document.body.style.opacity = '1';
 
     setTimeout(() => {
       loader.style.display = 'none';
     }, 1000);
 
-  }, 5600);
+  }, 6000);
 });
 
 
