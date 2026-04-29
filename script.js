@@ -1,10 +1,6 @@
 const navLogo = document.getElementById('nav-logo');
 const loaderLogo = document.getElementById('loader-logo');
 
-if (navLogo) {
-  navLogo.addEventListener('error', () => handleImgError(navLogo, 'LN'));
-}
-
 //loader
 window.addEventListener('load', () => {
   const loader = document.getElementById('loader');
@@ -154,60 +150,6 @@ if (canvas) {
     mouse.y = e.clientY;
   }, { passive: true });
 
-  //60 nodes — O(n²) connection check is ~3500 ops/frame, fine at this count
-  const NODE_COUNT = 60;
-  const nodes = Array.from({ length: NODE_COUNT }, () => ({
-    x: Math.random() * window.innerWidth,
-    y: Math.random() * window.innerHeight,
-    vx: (Math.random() - 0.5) * 0.4,
-    vy: (Math.random() - 0.5) * 0.4
-  }));
-
-  function animateBG() {
-    ctx.clearRect(0, 0, w, h);
-
-    smooth.x += (mouse.x - smooth.x) * 0.08;
-    smooth.y += (mouse.y - smooth.y) * 0.08;
-
-    //update and draw nodes
-    nodes.forEach(n => {
-      n.x += n.vx;
-      n.y += n.vy;
-      if (n.x < 0 || n.x > w) n.vx *= -1;
-      if (n.y < 0 || n.y > h) n.vy *= -1;
-
-      const dx = n.x - smooth.x;
-      const dy = n.y - smooth.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-
-      if (dist < 200) {
-        n.x += dx * 0.002;
-        n.y += dy * 0.002;
-      }
-
-      const alpha = 1 - Math.min(dist / 250, 1);
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, 1.5 + alpha * 2, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(232,255,71,${0.15 + alpha * 0.4})`;
-      ctx.fill();
-    });
-
-    //connect nearby nodes
-    for (let i = 0; i < nodes.length; i++) {
-      for (let j = i + 1; j < nodes.length; j++) {
-        const dx = nodes[i].x - nodes[j].x;
-        const dy = nodes[i].y - nodes[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        if (dist < 120) {
-          ctx.beginPath();
-          ctx.moveTo(nodes[i].x, nodes[i].y);
-          ctx.lineTo(nodes[j].x, nodes[j].y);
-          ctx.strokeStyle = `rgba(232,255,71,${0.05 - dist / 3000})`;
-          ctx.stroke();
-        }
-      }
-    }
 
     //mouse proximity glow
     const gradient = ctx.createRadialGradient(smooth.x, smooth.y, 0, smooth.x, smooth.y, 250);
