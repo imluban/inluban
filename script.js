@@ -1,24 +1,24 @@
 const navLogo = document.getElementById('nav-logo');
 const loaderLogo = document.getElementById('loader-logo');
 
-//loader
+
+// ================= LOADER =================
 window.addEventListener('load', () => {
   const loader = document.getElementById('loader');
 
   setTimeout(() => {
     loader.style.opacity = '0';
-
     document.body.style.opacity = '1';
 
     setTimeout(() => {
       loader.style.display = 'none';
-    }, 1000);
+    }, 800);
 
-  }, 6000);
+  }, 3800); // synced with CSS animation
 });
 
 
-//scroll progress bar
+// ================= SCROLL PROGRESS =================
 const scrollBar = document.getElementById('scroll-bar');
 
 window.addEventListener('scroll', () => {
@@ -29,7 +29,7 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 
-//scroll blur
+// ================= SCROLL BLUR =================
 let ticking = false;
 
 window.addEventListener('scroll', () => {
@@ -46,11 +46,10 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 
-//cursor system
+// ================= CURSOR =================
 const dot = document.getElementById('cursor');
 const ring = document.getElementById('cursor-ring');
 
-//only run cursor system on non-touch devices
 if (window.matchMedia('(pointer: fine)').matches && dot && ring) {
 
   let mouseX = 0, mouseY = 0;
@@ -72,13 +71,12 @@ if (window.matchMedia('(pointer: fine)').matches && dot && ring) {
   }
   animateCursor();
 
-  //hover expand state
   document.querySelectorAll('a, button, .project-card, .skill-card').forEach(el => {
     el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
     el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
   });
 
-  //cursor trials
+  // cursor trail
   const trails = [];
   for (let i = 0; i < 6; i++) {
     const t = document.createElement('div');
@@ -93,7 +91,6 @@ if (window.matchMedia('(pointer: fine)').matches && dot && ring) {
         trail.style.left = e.clientX + 'px';
         trail.style.top = e.clientY + 'px';
         trail.style.opacity = '0.6';
-        //css transition handles the fade out
         setTimeout(() => { trail.style.opacity = '0'; }, 80);
       }, i * 30);
     });
@@ -101,7 +98,7 @@ if (window.matchMedia('(pointer: fine)').matches && dot && ring) {
 }
 
 
-//magnetic btn
+// ================= MAGNETIC BUTTON =================
 document.querySelectorAll('.btn-ghost').forEach(el => {
   el.addEventListener('mousemove', e => {
     const rect = el.getBoundingClientRect();
@@ -115,13 +112,12 @@ document.querySelectorAll('.btn-ghost').forEach(el => {
 });
 
 
-//scroll reveal
-//uses css .reveal / .reveal.visible classes
+// ================= SCROLL REVEAL =================
 const revealObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
-      revealObserver.unobserve(entry.target); // fire once
+      revealObserver.unobserve(entry.target);
     }
   });
 }, { threshold: 0.1 });
@@ -129,8 +125,9 @@ const revealObserver = new IntersectionObserver(entries => {
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
 
-//canvas bg
+// ================= CANVAS BG (FIXED) =================
 const canvas = document.getElementById('bg-canvas');
+
 if (canvas) {
   const ctx = canvas.getContext('2d');
   let w, h;
@@ -150,11 +147,21 @@ if (canvas) {
     mouse.y = e.clientY;
   }, { passive: true });
 
+  function animateBG() {
+    ctx.clearRect(0, 0, w, h);
 
-    //mouse proximity glow
-    const gradient = ctx.createRadialGradient(smooth.x, smooth.y, 0, smooth.x, smooth.y, 250);
+    // smooth follow
+    smooth.x += (mouse.x - smooth.x) * 0.08;
+    smooth.y += (mouse.y - smooth.y) * 0.08;
+
+    const gradient = ctx.createRadialGradient(
+      smooth.x, smooth.y, 0,
+      smooth.x, smooth.y, 250
+    );
+
     gradient.addColorStop(0, 'rgba(232,255,71,0.12)');
     gradient.addColorStop(1, 'rgba(232,255,71,0)');
+
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, w, h);
 
@@ -165,7 +172,7 @@ if (canvas) {
 }
 
 
-//smooth nav scroll
+// ================= SMOOTH SCROLL =================
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const target = document.querySelector(a.getAttribute('href'));
